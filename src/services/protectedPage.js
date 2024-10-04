@@ -7,18 +7,23 @@ import { useSelector } from "react-redux";
 const ProtectedPageService = () => {
   const router = useRouter();
   const path = usePathname();
-  const user = getData("user");
-  const userAuth = user?.token;
+  const user = getData("token");
+  const userAuth = user?.access_token;
   const selector = useSelector((state) => state.registerApi);
 
-  const afterLoginProtectedPages = [];
+  const afterLoginProtectedPages = [
+    // "/customer/wallet",
+    // "/customer/profile",
+    // "/customer/cart",
+    // "/customer/history",
+    // "/customer/productdetail/[productid]",
+    // "/customer/standingorders",
+  ];
+
   const afterLoginNotAccessiblePages = [
-    "/",
-    "/home",
-    "/register",
-    "/login",
-    "/resetPassword",
-    "/forgotPassword",
+    // "/",
+    // "/register",
+    // "/login",
   ];
 
   useEffect(() => {

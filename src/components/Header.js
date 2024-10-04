@@ -14,7 +14,7 @@ export default function Header() {
       {/* Left Side: Logo and Location */}
       <div className="flex items-center space-x-4">
         <div className="bg-yellow-500 p-2 rounded-md">
-          <img src="/logo.png" alt="Traemo" className="h-8" />
+          <img src="/images/logo.png" alt="Traemo" className="h-8" />
         </div>
         <button className="bg-yellow-400 text-white flex items-center px-4 py-2 rounded-full shadow-md hover:bg-yellow-500">
           <svg

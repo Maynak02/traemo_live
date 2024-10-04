@@ -40,7 +40,7 @@ const OrderListScreen = () => {
                 </div>
                 <div className="shift-block">
                   <p>
-                    Start of shift <span>4 o'clock</span>
+                    Start of shift <span>4 o{"'"}clock</span>
                   </p>
                 </div>
                 <div className="rider-block-data">
@@ -76,7 +76,7 @@ const OrderListScreen = () => {
                 </div>
                 <div className="shift-block">
                   <p>
-                    Start of shift <span>4 o'clock</span>
+                    Start of shift <span>4 o{"'"}clock</span>
                   </p>
                 </div>
                 <div className="rider-block-data">
