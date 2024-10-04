@@ -14,6 +14,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
+import { getUserAction } from "@/redux/Auth/action";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,6 +65,7 @@ const LoginPage = () => {
     };
     try {
       const { payload: res } = await dispatch(loginAction(objParam));
+      console.log(res);
       const { data, status, message } = res;
       if (status) {
         console.log("ress--->key", data.message);
@@ -85,11 +88,17 @@ const LoginPage = () => {
     };
     try {
       const { payload: res } = await dispatch(authLinkAction(objParam));
+      console.log("ressss", res);
       const { data, status, message } = res;
       if (status) {
         setIsLoading(false);
-        console.log("ress--->", data);
-        router.push("/hubmanager/dashboard");
+        console.log("ressaa--->", data);
+        const { payload: res1 } = await dispatch(getUserAction());
+        if (res1?.data?.roles == "hubmanager") {
+          router.push("/hubmanager/dashboard");
+        } else if (res1?.data?.roles == "supplier") {
+          router.push("/supplier/dashboard");
+        }
       } else {
         setIsLoading(false);
         toast.error(message);
@@ -119,14 +128,14 @@ const LoginPage = () => {
                   <RHFTextInput name="email" placeholder={t("EmailAddress")} />
                 </div>
                 <div className="btn-form">
-                  <button className="btn button-common">{t("Register")}</button>
+                  <button className="btn button-common">{t("Login")}</button>
                 </div>
-                <div className="last-link">
+                {/* <div className="last-link">
                   <p>
                     {t("DontHaveAccount")}{" "}
                     <Link href="/register">{t("SignUp")}</Link>
                   </p>
-                </div>
+                </div> */}
               </div>
             </FormProvider>
           </div>

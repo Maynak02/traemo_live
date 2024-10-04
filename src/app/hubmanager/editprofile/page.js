@@ -6,12 +6,14 @@ import Header from "@/components/styles/header.style";
 import Link from "next/link";
 import "../../globals.css";
 import Select from "react-select";
+import { useRouter, usePathname, useServerInsertedHTML } from "next/navigation";
 
 const EditProfile = () => {
+  const router = useRouter();
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "Männlich", label: "Männlich" },
+    { value: "Männlich-1", label: "Männlich" },
+    { value: "Männlich", label: "Männlich" },
   ];
 
   return (
@@ -20,14 +22,18 @@ const EditProfile = () => {
         <Header>
           <div className="header-left">
             <div className="logo-header padding-diff-block">
-              <Link href="/hubmanager/dashboard" className="back-arrow">
+              <a
+                className="back-arrow"
+                onClick={() => router.back()}
+                style={{ cursor: "pointer" }}
+              >
                 <img alt="arrow" src="/back-arrrow-header.svg" />
-              </Link>
+              </a>
             </div>
           </div>
           <div className="header-right">
             <div className="header-right-btn">
-              <button>Save changes</button>
+              <button>Änderungen speichern</button>
             </div>
           </div>
         </Header>
@@ -71,20 +77,20 @@ const EditProfile = () => {
               <div className="edit-profile-block-three-block-inner">
                 <div className="top-edit-profile-block">
                   <img alt="img" src="/edit-profile-icon-2.svg" />
-                  <h3>Address</h3>
+                  <h3>Adresse</h3>
                 </div>
                 <div className="form-block-inner">
                   <div className="form-block-inner-block">
                     <div className="form-block-inner-block-flex">
-                      <input type="text" placeholder="Street"></input>
+                      <input type="text" placeholder="Straße"></input>
                     </div>
                     <div className="form-block-inner-block-flex">
-                      <input type="text" placeholder="House Number"></input>
+                      <input type="text" placeholder="Hausnummer"></input>
                     </div>
                   </div>
                   <div className="form-block-inner-block">
                     <div className="form-block-inner-block-flex">
-                      <input type="text" placeholder="Postal code"></input>
+                      <input type="text" placeholder="Postleitzahl"></input>
                     </div>
                     <div className="form-block-inner-block-flex">
                       <input type="text" placeholder="Ort"></input>
@@ -97,7 +103,7 @@ const EditProfile = () => {
               <div className="edit-profile-block-three-block-inner">
                 <div className="top-edit-profile-block">
                   <img alt="img" src="/edit-profile-icon-1.svg" />
-                  <h3>Payout</h3>
+                  <h3>Auszahlung</h3>
                 </div>
                 <div className="form-block-inner">
                   <div className="form-block-inner-block width-full-block">
