@@ -18,10 +18,13 @@ export const getFundServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await GetFunds(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
-      toast.error(err?.response?.data?.message || err.message);
+      // toast.error(err?.response?.data?.message || err.message);
       if (err instanceof AxiosError) {
         return rejectWithValue(err?.response?.data?.message);
       }
@@ -35,7 +38,10 @@ export const createPaymentServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await CreatePayment(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -52,7 +58,10 @@ export const chargeUserServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await ChargeUser(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -69,7 +78,10 @@ export const listPaymentServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await ListPaymentMethod(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -86,7 +98,10 @@ export const createRefundServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await CreateRefund(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -103,7 +118,10 @@ export const getTransactionServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await GetTransaction(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -120,7 +138,10 @@ export const getAutoTopupServiceAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await GetAutoTopup(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);
@@ -137,7 +158,10 @@ export const createUpdateAutoTopupAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await CreateUpdateAutoTopup(payload);
-      return { data, status, message };
+      if (!status) {
+        throw new Error(message);
+      }
+      return data;
     } catch (err) {
       // console.log("🚀 ~ err:", err);
       toast.error(err?.response?.data?.message || err.message);

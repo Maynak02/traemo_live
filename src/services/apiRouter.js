@@ -38,10 +38,11 @@ export const API_ROUTER = {
   READ_CATEGORY: "/categories/",
   LIST_CATEGORIES: "/categories",
 
+  // PRODUCT
   // CREATE_PRODUCT: "/products",
   GET_PRODUCTS: "/products",
   LIST_PRODUCTS_ME: "/products/me",
-  GET_PRODUCT_BY_ID: "/products",
+  GET_PRODUCT_BY_ID: "/products{product_id}/product",
   // UPDATE_PRODUCT: "/products/",
   // DELETE_PRODUCT: "/products/",
 };

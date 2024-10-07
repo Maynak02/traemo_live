@@ -7,7 +7,7 @@ const Footer = () => {
   const [showFooter, setShowFooter] = useState(false);
 
   const visitorPages = [
-    // "/",
+    "/",
     // "/home",
     // "/about",
     // "/bookService",
@@ -33,7 +33,7 @@ const Footer = () => {
           <div className="common-container">
             <div className="newsleeter-custom-inner">
               <div className="newsleeter-custom-inner-left">
-                {/* <img src="/images/next.svg" alt="email" /> */}
+                <img src="/images/next.svg" alt="email" />
               </div>
               <div className="newsleeter-custom-inner-right">
                 <h2>Subscribe to our Newsletter</h2>
