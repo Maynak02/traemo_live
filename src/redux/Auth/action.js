@@ -51,7 +51,6 @@ export const authLinkAction = createAsyncThunk(
   "authSlice/authLinkAction",
   async (payload, { rejectWithValue }) => {
     try {
-      console.log("reacheddd", payload);
       const { data, status, message } = await AuthLink(payload);
       if (data?.access_token) {
         saveData("token", data);
@@ -99,7 +98,6 @@ export const getUserAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, status, message } = await GetUser(payload);
-      console.log("data", data);
       return { data, status, message };
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -109,11 +107,6 @@ export const getUserAction = createAsyncThunk(
     }
   }
 );
-export const getUserAction1 = async (payload) => {
-  const res = await GetUser(payload);
-  console.log("data", res);
-};
-
 export const createUserAction = createAsyncThunk(
   "user/createUserAction",
   async (payload, { rejectWithValue }) => {

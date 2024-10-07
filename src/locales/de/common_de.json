@@ -55,6 +55,7 @@
   "Addresses": "Adressen",
   "OrderHistory": "Bestellhistorie",
   "ProceedToCheckout": "Zur Kasse gehen",
+  "Support": "Unterstützung",
 
   "Discover": "Entdecken",
   "Discount": "Rabatte",
@@ -94,8 +95,35 @@
   "SignUp": "Registrieren",
   "Login": "Anmelden",
   "SignIn": "Anmelden",
+  "Logout": "Abmelden",
 
   "fname": "Vorname",
   "lname": "Nachname",
-  "AlreadyAccount": "Sie haben bereits ein Konto?"
+  "gender": "Geschlecht",
+  "state": "Staat",
+  "city": "Stadt",
+  "country": "Land",
+  "house": "Haus",
+  "postalcode": "Postleitzahl",
+  "AlreadyAccount": "Sie haben bereits ein Konto?",
+
+  "ConfirmLogout": "Abmeldung bestätigen",
+  "WantToLogout": "Möchten Sie sich wirklich abmelden?",
+  "Cancel": "Abbrechen",
+
+  "SelectDeliveryDate": "Wählen Sie bitte den gewünschten Liefertermin aus und geben Sie ggf. die erforderlichen Lieferanweisungen ein.",
+  "AddInstruction": "Tippen, um Lieferanweisungen hinzuzufügen",
+  "DeliveryBy": "Lieferung bis ",
+  "Sum": "Summe",
+  "Deliveryfees": "Liefergebühren",
+  "Intotal": "Insgesamt",
+  "OrderNowForFee": "Jetzt kostenpflichtig bestellen",
+
+  "Sunday": "Sonntags",
+  "Monday": "Montags",
+  "Tuesday": "Dienstags",
+  "Wednesday": "Mittwochs",
+  "Thursday": "Donnerstags",
+  "Friday": "Freitags",
+  "Saturday": "Samstags"
 }

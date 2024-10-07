@@ -1,17 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require("tailwindcss/colors");
-const { nextui } = require("@nextui-org/theme");
 
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    // single component styles
-    // "./node_modules/@nextui-org/theme/dist/components/button.js",
-    // or you can use a glob pattern (multiple component styles)
-    // "./node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input|calendar).js",
   ],
   theme: {
     extend: {
@@ -43,6 +38,10 @@ module.exports = {
         serviceTextColor: "#98A2B3",
         grayE1: "#E1DFDF",
         borderbackground: "#D0D5DD",
+        paidColor: "rgba(236, 253, 243, 1)",
+        cancelColor: "rgba(254, 243, 242, 1)",
+        refundColor: "rgba(242, 244, 247, 1)",
+        grayText: "#667085",
       },
     },
     fontFamily: {
@@ -59,5 +58,4 @@ module.exports = {
     },
   },
   plugins: [],
-  // plugins: [nextui()],
 };

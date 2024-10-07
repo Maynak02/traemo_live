@@ -55,6 +55,7 @@
   "Addresses": "Addresses",
   "OrderHistory": "Order history",
   "ProceedToCheckout": "Proceed to Checkout",
+  "Support": "Support",
 
   "Discover": "Discover",
   "Discount": "Discounts",
@@ -94,8 +95,35 @@
   "SignUp": "Sign Up",
   "Login": "Login",
   "SignIn": "Sign In",
+  "Logout": "Log out",
 
   "fname": "First Name",
   "lname": "Last Name",
-  "AlreadyAccount": "Already have an account?"
+  "gender": "Gender",
+  "state": "State",
+  "city": "City",
+  "country": "Country",
+  "house": "House",
+  "postalcode": "Postal Code",
+  "AlreadyAccount": "Already have an account?",
+
+  "ConfirmLogout": "Confirm Logout",
+  "WantToLogout": "Are you sure you want to logout?",
+  "Cancel": "Cancel",
+
+  "SelectDeliveryDate": "Please select the desired delivery date and provide any necessary delivery instructions.",
+  "AddInstruction": "Tap to add delivery instructions",
+  "DeliveryBy": "Delivery by ",
+  "Sum": "Sum",
+  "Deliveryfees": "Delivery fees",
+  "Intotal": "In total",
+  "OrderNowForFee": "Order now for a fee",
+
+  "Sunday": "Sunday",
+  "Monday": "Monday",
+  "Tuesday": "Tuesday",
+  "Wednesday": "Wednesday",
+  "Thursday": "Thursday",
+  "Friday": "Friday",
+  "Saturday": "Saturday"
 }

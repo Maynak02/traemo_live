@@ -6,12 +6,13 @@ const CommonPageBLockHub = styled.div`
     .common-block-hub-menu {
       padding: 16px 32px;
       border-bottom: 1px solid rgba(208, 213, 221, 0.6);
+      background-color: #fcfcfd;
       ul {
         display: flex;
         align-items: center;
         li {
           margin-right: 12px;
-          a {
+          button {
             color: #98a2b3;
             font-size: 14px;
             border: 1px solid transparent;
@@ -21,8 +22,9 @@ const CommonPageBLockHub = styled.div`
             align-items: center;
             justify-content: center;
             width: 160px;
-            &.active-link {
-              box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+            &.active {
+              box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+                0px 1px 2px rgba(16, 24, 40, 0.06);
               border: 1px solid rgba(208, 213, 221, 0.6);
               color: #f9c93c;
             }
@@ -42,7 +44,6 @@ const CommonPageBLockHub = styled.div`
             border: 1px solid #d0d5dd;
             border-radius: 24px;
             padding: 32px;
-            min-height: 350px;
           }
         }
       }
@@ -263,7 +264,7 @@ const CommonPageBLockHub = styled.div`
                           position: relative;
                           cursor: pointer;
                           &::before {
-                            content: '';
+                            content: "";
                             -webkit-appearance: none;
                             background-color: transparent;
                             border: 1px solid #94a3b8;
@@ -278,7 +279,7 @@ const CommonPageBLockHub = styled.div`
                         }
                       }
                       .form-group input:checked + label:after {
-                        content: '';
+                        content: "";
                         display: block;
                         position: absolute;
                         top: 5px;
@@ -546,7 +547,7 @@ const CommonPageBLockHub = styled.div`
                         position: relative;
                         cursor: pointer;
                         &::before {
-                          content: '';
+                          content: "";
                           -webkit-appearance: none;
                           background-color: transparent;
                           border: 1px solid #94a3b8;
@@ -561,7 +562,7 @@ const CommonPageBLockHub = styled.div`
                       }
                     }
                     .form-group input:checked + label:after {
-                      content: '';
+                      content: "";
                       display: block;
                       position: absolute;
                       top: 5px;
@@ -597,7 +598,8 @@ const CommonPageBLockHub = styled.div`
               button {
                 border: 1px solid rgba(208, 213, 221, 0.6);
                 border-radius: 8px;
-                box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+                box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+                  0px 1px 2px rgba(16, 24, 40, 0.06);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -611,124 +613,6 @@ const CommonPageBLockHub = styled.div`
                   font-size: 14px;
                 }
               }
-            }
-          }
-        }
-      }
-    }
-    .common-calender-page {
-      position: relative;
-      padding: 32px;
-      .rdp-root {
-        .rdp-months {
-          display: flex;
-          width: 100%;
-          max-width: 100%;
-          flex-wrap: nowrap;
-          .rdp-nav {
-            display: none;
-          }
-          .rdp-month {
-            padding: 32px;
-            border: 1px solid #d0d5dd;
-            border-radius: 12px;
-            width: 33.33%;
-            .rdp-month_caption {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              .rdp-caption_label {
-                font-size: 24px;
-                line-height: 32px;
-                margin-bottom: 12px;
-                font-weight: 500;
-                color: #000;
-              }
-            }
-            .rdp-month_grid {
-              width: 100%;
-              thead {
-                .rdp-weekdays {
-                  th {
-                    font-size: 16px;
-                    line-height: 24px;
-                    color: #000;
-                    font-weight: 400;
-                  }
-                }
-              }
-              tbody {
-                .rdp-week {
-                  .rdp-day {
-                    border-radius: 24px;
-                    color: #000;
-                    &.rdp-selected,
-                    &:hover {
-                      color: #f9c93c;
-                      background-color: rgba(249, 201, 60, 0.15);
-                      button {
-                        color: #f9c93c;
-                      }
-                    }
-
-                    button {
-                      margin: 0 auto;
-                      border: none;
-                      color: #000;
-                      font-weight: 400;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    .label-block-close {
-      padding: 0px 32px 32px;
-      position: relative;
-      .label-block-close-block {
-        padding: 32px;
-        border: 1px solid #d0d5dd;
-        border-radius: 12px;
-        .label-block-close-inner {
-          margin-bottom: 12px;
-          border-radius: 8px;
-          background-color: #fef3f2;
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          span {
-            display: block;
-            background-color: #f04438;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-          }
-          h3 {
-            font-size: 16px;
-            line-height: 24px;
-            color: #f04438;
-            padding-left: 10px;
-            font-weight: 400;
-          }
-          &.weekend-block {
-            background-color: #f9f5ff;
-            span {
-              background-color: #7f56d9;
-            }
-            h3 {
-              color: #7f56d9;
-            }
-          }
-          &.open-block {
-            background-color: #f6fef9;
-            span {
-              background-color: #027a48;
-            }
-            h3 {
-              color: #027a48;
             }
           }
         }

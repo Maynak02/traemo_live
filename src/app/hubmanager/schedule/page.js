@@ -6,27 +6,21 @@ import Header from "@/components/styles/header.style";
 import Link from "next/link";
 import "../../globals.css";
 import Select from "react-select";
-import { useRouter, usePathname, useServerInsertedHTML } from "next/navigation";
 
 const ScheduleScreen = () => {
-  const router = useRouter();
   return (
     <CommonPageBLockHub>
       <div className="">
         <Header>
           <div className="header-left">
             <div className="logo-header padding-diff-block">
-              <a
-                className="back-arrow"
-                onClick={() => router.back()}
-                style={{ cursor: "pointer" }}
-              >
+              <Link href="/hubmanager/dashboard" className="back-arrow">
                 <img alt="arrow" src="/back-arrrow-header.svg" />
-              </a>
+              </Link>
             </div>
             <div className="calender-block">
               <span className="montag-block">Montag, 15.07.2024</span>
-              <span className="hub-block">Schacht für, ABCD</span>
+              <span className="hub-block">Bay for, ABCD</span>
             </div>
           </div>
         </Header>
@@ -39,18 +33,18 @@ const ScheduleScreen = () => {
               <div className="schedule-block-four-inner-block">
                 <div className="schedule-block-common">
                   <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="active-block">Aktiv</span>
+                    <h2>Overview</h2>
+                    <span className="active-block">Active</span>
                   </div>
                   <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
+                    <p>Shift start: 4:02 a.m</p>
                     <p className="block-tag">-</p>
-                    <p className="end-shift">Schichtende: 8:37 Uhr</p>
+                    <p className="end-shift">Shift end: 8:37 a.m</p>
                   </div>
                 </div>
                 <div className="schedule-block-common">
                   <div className="top-block">
-                    <h2>Schicht manuell beenden</h2>
+                    <h2>End shift manually</h2>
                   </div>
                   <div className="schedule-block-common-checkbox">
                     <div className="checkbox-block-inner">
@@ -63,7 +57,7 @@ const ScheduleScreen = () => {
                       </div>
                     </div>
                     <div className="checkbox-block-inner">
-                      <p>Krankheit </p>
+                      <p>Illness</p>
                       <div className="checkbox-custom">
                         <div className="form-group">
                           <input type="checkbox" id="rider"></input>
@@ -72,7 +66,7 @@ const ScheduleScreen = () => {
                       </div>
                     </div>
                     <div className="checkbox-block-inner">
-                      <p>Unfall</p>
+                      <p>Accident</p>
                       <div className="checkbox-custom">
                         <div className="form-group">
                           <input type="checkbox" id="rider"></input>
@@ -81,7 +75,7 @@ const ScheduleScreen = () => {
                       </div>
                     </div>
                     <div className="checkbox-block-inner">
-                      <p>Korrektur</p>
+                      <p>Correction</p>
                       <div className="checkbox-custom">
                         <div className="form-group">
                           <input type="checkbox" id="rider"></input>
@@ -100,13 +94,13 @@ const ScheduleScreen = () => {
               <div className="schedule-block-four-inner-block">
                 <div className="schedule-block-common">
                   <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="request-block">Angefordert</span>
+                    <h2>Overview</h2>
+                    <span className="request-block">Requested</span>
                   </div>
                   <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
+                    <p>Shift start: 4:02 a.m</p>
                     <p className="block-tag">-</p>
-                    <p className="end-shift">Schichtende: 8:37 Uhr</p>
+                    <p className="end-shift">Shift end: 8:37 a.m</p>
                   </div>
                 </div>
                 <div className="add-btn-block">
@@ -131,7 +125,7 @@ const ScheduleScreen = () => {
                         stroke-linecap="round"
                       />
                     </svg>
-                    <span>Schicht löschen</span>
+                    <span>Delete</span>
                   </button>
                 </div>
               </div>
@@ -140,18 +134,18 @@ const ScheduleScreen = () => {
               <div className="schedule-block-four-inner-block">
                 <div className="schedule-block-common">
                   <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="complate-block">Erledigt</span>
+                    <h2>Overview</h2>
+                    <span className="complate-block">Completed</span>
                   </div>
                   <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
+                    <p>Shift start: 4:02 a.m</p>
                     <p className="block-tag">-</p>
-                    <p>Schichtende: 8:37 Uhr</p>
+                    <p>Shift end: 8:37 a.m</p>
                   </div>
                 </div>
                 <div className="schedule-block-common">
                   <div className="top-block">
-                    <h2>Arbeitszeiten ändern</h2>
+                    <h2>Change working hours</h2>
                   </div>
                   <div className="input-block-inner">
                     <input type="text" placeholder="End time"></input>

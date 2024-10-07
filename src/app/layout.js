@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/images/logo.png" />
         <title>Traemo</title>
       </head>
-      <body>
+      <body className={`${inter.className}`}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <I18nextProvider i18n={i18next}>
