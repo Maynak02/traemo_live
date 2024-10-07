@@ -9,9 +9,10 @@ const ProtectedPageService = () => {
   const path = usePathname();
   const user = getData("user");
   const userAuth = user?.token;
-  const selector = useSelector((state) => state.registerApi);
+  const selector = useSelector(state => state.registerApi);
 
-  const afterLoginProtectedPages = [];
+  const afterLoginProtectedPages = [
+   ];
   const afterLoginNotAccessiblePages = [
     "/",
     "/home",
@@ -19,11 +20,11 @@ const ProtectedPageService = () => {
     "/login",
     "/resetPassword",
     "/forgotPassword",
-  ];
+     ];
 
   useEffect(() => {
     if (afterLoginNotAccessiblePages.includes(path) && userAuth) {
-      let dashboard_url = `/login`;
+      let dashboard_url = `/que1`;
       router.push(dashboard_url);
     }
 
