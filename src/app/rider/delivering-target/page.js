@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
@@ -116,10 +114,10 @@ const ShiftCommisioning = () => {
                             <div className="delevery-two-block-border">
                                 <h2> Anweisungen</h2>
                                 <p>
-                                    "Please leave the package at my front door.
+                                    &quot;Please leave the package at my front door.
                                     If no one answers, kindly place it behind
                                     the potted plant to the left of the
-                                    entrance. Thank you!
+                                    entrance. Thank you!&quot;
                                 </p>
                             </div>
                         </div>
