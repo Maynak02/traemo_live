@@ -1,48 +1,80 @@
 export const API_ROUTER = {
-  // LOGIN
-  LOGIN_USER: "/auth/login",
-  AUTH_TOKEN: "/auth/token",
-  AUTH_LINK: "/auth/link",
-  AUTH_LOGOUT: "/auth/logout",
-  AUTH_LOGOUT_ALL: "/auth/logoutall",
+    // LOGIN
+    LOGIN_USER: "/auth/login",
+    AUTH_TOKEN: "/auth/token",
+    AUTH_LINK: "/auth/link",
+    AUTH_LOGOUT: "/auth/logout",
+    AUTH_LOGOUT_ALL: "/auth/logoutall",
 
-  // USERS
-  GET_ME: "/users",
-  CREATE_USER: "/users",
-  UPDATE_USER: "/users",
+    HUB_LIST: "/hubs",
+    GET_HUB_BY_ID: (hubId) => `/hubs/${hubId}`,
+    DAYS_LIST: "/days",
 
-  // PAYMENTS
-  CREATE_PAYMENT: "/payments",
-  LIST_PAYMENT_METHODS: "/payments/methods",
+    // HUB MANAGERS
+    HUBMANAGERS: "/hubmanagers",
+    GET_HUBMANAGERS_BY_ID: (id) => `/hubmanagers/${id}`,
+    UPDATE_HUB_MANAGER: "/hubmanagers",
 
-  GET_FUNDS: "/funds",
-  CHARGE_USER: "/funds",
+    // USERS
+    GET_ME: "/users",
+    CREATE_USER: "/users",
+    UPDATE_USER: "/users",
 
-  SUCCESS_PAYMENT: "/webhook/success",
-  CREATE_REFUND: "/webhook/refunded",
+    // PAYMENTS
+    CREATE_PAYMENT: "/payments",
+    LIST_PAYMENT_METHODS: "/payments/methods",
 
-  GET_TRANSACTIONS: "/transactions",
-  // AUTO TOPUP
-  GET_AUTO_TOPUP: "/autotopup",
-  CREATE_UPDATE_AUTO_TOPUP: "/autotopup",
+    GET_FUNDS: "/funds",
+    CHARGE_USER: "/funds",
 
-  // ADDRESS
-  UPDATE_ADDRESS: "/addresses/",
-  CREATE_ADDRESS: "/addresses",
+    SUCCESS_PAYMENT: "/webhook/success",
+    CREATE_REFUND: "/webhook/refunded",
 
-  // Municipality
-  GET_MUNICIPALITY_ID: "/municipalities/",
-  GET_MUNICIPALITY_LIST: "/municipalities",
+    GET_TRANSACTIONS: "/transactions",
+    // AUTO TOPUP
+    GET_AUTO_TOPUP: "/autotopup",
+    CREATE_UPDATE_AUTO_TOPUP: "/autotopup",
 
-  // CATEGORY
-  READ_CATEGORY: "/categories/",
-  LIST_CATEGORIES: "/categories",
+    // ADDRESS
+    UPDATE_ADDRESS: "/addresses/",
+    CREATE_ADDRESS: "/addresses",
 
-  // PRODUCT
-  // CREATE_PRODUCT: "/products",
-  GET_PRODUCTS: "/products",
-  LIST_PRODUCTS_ME: "/products/me",
-  GET_PRODUCT_BY_ID: "/products{product_id}/product",
-  // UPDATE_PRODUCT: "/products/",
-  // DELETE_PRODUCT: "/products/",
+    // Municipality
+    GET_MUNICIPALITY_ID: "/municipalities/",
+    GET_MUNICIPALITY_LIST: "/municipalities",
+
+    // CATEGORY
+    READ_CATEGORY: "/categories/",
+    LIST_CATEGORIES: "/categories",
+
+    // PRODUCT
+    ADD_PRODUCTS: "/products",
+    GET_PRODUCTS: "/products",
+    LIST_PRODUCTS_ME: "/products/me",
+    GET_PRODUCT_BY_ID: (id) => `/products/${id}`,
+    UPDATE_PRODUCT_BY_ID: (id) => `/products/${id}`,
+    GET_SHIFTS: "/shifts",
+    CREATE_SHIFT: "/shifts",
+    GET_SHIFT_BY_ID: (id) => `/shifts/${id}`,
+    UPDATE_SHIFT_BY_ID: (id) => `/shifts/${id}`,
+
+    // RIDERS
+    GET_AVAILABILITIES: "/availabilities",
+    CREATE_AVAILABILITIES: "/availabilities",
+    DELETE_AVAILABILITY: (availabilityId) =>
+        `/availabilities/${availabilityId}`,
+
+    // DATA
+    GET_KNOWI_URL: "/knowi",
+
+    // UPDATE_PRODUCT: "/products/",
+    // DELETE_PRODUCT: "/products/",
+
+    // ** RIDERS
+
+    GET_RIDER: (riderId) => `/riders/${riderId}`,
+    UPDATE_RIDER: `/riders`,
+
+    // ** Upload Files
+    UPLOAD_FILE: "/uploads",
 };

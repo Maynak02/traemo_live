@@ -1,12 +1,12 @@
-"use client";
-import React, { useMemo } from "react";
+import CalendarShiftView from "@/sections/rider/dashboard/view/calendar-shift-view";
+import React from "react";
 
-const RiderDashboard = () => {
-  return (
-    <div className="container pt-[20px] ">
-      <a>Rider Dashboard</a>
-    </div>
-  );
+export const metadata = {
+    title: "Dashboard | Traemo",
 };
 
-export default RiderDashboard;
+const DashboardPage = () => {
+    return <CalendarShiftView />;
+};
+
+export default DashboardPage;

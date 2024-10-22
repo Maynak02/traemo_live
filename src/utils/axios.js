@@ -1,7 +1,8 @@
 import axios from "axios";
+import { HOST_API } from "../../config";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_APP_HOST_API,
+    baseURL: HOST_API,
 });
 
 export default axiosInstance;

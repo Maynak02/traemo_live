@@ -11,69 +11,57 @@ import StyledJsxRegistry from "./registry";
 import { persistor, store } from "@/redux/store";
 import { Provider } from "react-redux";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
-import { appWithTranslation } from "next-i18next";
-import { I18nextProvider } from "react-i18next";
-import common_en from "../locales/en/common_en.json";
-import common_de from "../locales/de/common_de.json";
-import i18next from "i18next";
 import { SessionProvider } from "next-auth/react";
 import ProtectedPageService from "@/services/protectedPage";
 import { PersistGate } from "redux-persist/integration/react";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/i18n";
 
 const inter = Inter({
-  variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
+    variable: "--font-inter",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["latin"],
 });
 const open_sans = Open_Sans({ subsets: ["latin"] });
 const rubik = Rubik({
-  variable: "--font-rubik",
-  subsets: ["latin"],
+    variable: "--font-rubik",
+    subsets: ["latin"],
 });
 
 export default function RootLayout({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const router = useRouter();
+    const pathname = usePathname();
 
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+    const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
-  useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
-    return <>{styles}</>;
-  });
+    useServerInsertedHTML(() => {
+        const styles = styledComponentsStyleSheet.getStyleElement();
+        styledComponentsStyleSheet.instance.clearTag();
+        return <>{styles}</>;
+    });
 
-  i18next.init({
-    interpolation: { escapeValue: false }, // React already does escaping
-    lng: "de", // language to use
-    resources: {
-      en: { common: common_en },
-      de: { common: common_de },
-    },
-  });
-
-  return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/images/logo.png" />
-        <title>Traemo</title>
-      </head>
-      <body>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <I18nextProvider i18n={i18next}>
-              <MainDiv>
-                <StyledJsxRegistry>
-                  <ProtectedPageService />
-                  <ToastWrapper />
-                  {children}
-                </StyledJsxRegistry>
-              </MainDiv>
+    return (
+        <html lang="en">
+            <head>
+                <link rel="icon" href="/images/logo.png" />
+                <title>Traemo</title>
+            </head>
+            <I18nextProvider i18n={i18n}>
+                <body>
+                    <Provider store={store}>
+                        <PersistGate loading={null} persistor={persistor}>
+                            <MainDiv>
+                                <StyledJsxRegistry>
+                                    <ProtectedPageService />
+                                    <ToastWrapper />
+                                    {children}
+                                </StyledJsxRegistry>
+                            </MainDiv>
+                        </PersistGate>
+                    </Provider>
+                </body>
             </I18nextProvider>
-          </PersistGate>
-        </Provider>
-      </body>
-    </html>
-  );
+        </html>
+    );
 }

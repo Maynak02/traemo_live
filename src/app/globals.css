@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,13 +17,13 @@
 } */
 
 body {
-  color: #000;
-  background:  #fff;
-  /* font-family: "Inter", sans-serif; */
-  font-family:var(--font-inter);
-  position: relative;
-  margin: 0px;
-  padding: 0px;
+    color: #000;
+    background: #fff;
+    /* font-family: "Inter", sans-serif; */
+    font-family: var(--font-inter);
+    position: relative;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* @layer utilities {
@@ -32,3 +31,11 @@ body {
     text-wrap: balance;
   }
 } */
+
+.full-block-link button {
+    display: flex;
+    align-items: center;
+}
+.full-block-link button span {
+    padding-left: 10px;
+}

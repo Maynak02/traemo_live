@@ -1,13 +1,22 @@
-import Header from "@/components/header";
+"use client";
+
 import React from "react";
 
-const SupplierLayout = ({ children }) => {
-  return (
-    <>
-      <Header />
-      {children}
-    </>
-  );
+import RoleBasedGuard from "@/components/guards/RoleBasedGuard";
+import { USER_ROLES } from "@/constants/keywords";
+import MapLoaderProvider from "@/context/map-loader-context";
+
+const RiderLayout = ({ children }) => {
+    return (
+        <>
+            <RoleBasedGuard requiredRole={USER_ROLES.RIDER}>
+                <MapLoaderProvider>
+                    {/* <Header /> */}
+                    {children}
+                </MapLoaderProvider>
+            </RoleBasedGuard>
+        </>
+    );
 };
 
-export default SupplierLayout;
+export default RiderLayout;

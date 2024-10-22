@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import LoginPage from "./(auth)/login/page";
+import LoginPage from "@/components/auth/login";
+import "./globals.css";
 
 const Home = () => {
-  return (
-    <div>
-      <LoginPage />
-    </div>
-  );
+    return (
+        <div>
+            <LoginPage />
+        </div>
+    );
 };
 
 export default Home;

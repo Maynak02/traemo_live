@@ -1,172 +1,126 @@
 "use client";
-import { useCallback, useRef, useEffect } from "react";
-import React, { useMemo, useState } from "react";
+import React from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import CommonPageBLockHub from "@/components/styles/hubmanager.style";
-import Header from "@/components/styles/header.style";
 import Link from "next/link";
-import "../../globals.css";
-import Select from "react-select";
-import { useRouter, usePathname, useServerInsertedHTML } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { enUS, de } from "react-day-picker/locale";
+import HubSelectBox from "@/components/common/hubSelectBox";
+import { PATH_DASHBOARD } from "@/routes/paths";
+import { useDaysForHubManager } from "@/hooks/useFetchHooks";
+import Loader from "@/components/Loader";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setDate } from "@/redux/Auth/AuthSlice";
+const Layers = () => {
+    const router = useRouter();
+    const { sortedDays, isLoading } = useDaysForHubManager();
+    const dispatch = useDispatch();
+    const { t, i18n } = useTranslation("common");
+    const localeMapping = {
+        en: enUS,
+        de: de,
+    };
+    const today = new Date();
 
-const ScheduleScreen = () => {
-  const router = useRouter();
-  return (
-    <CommonPageBLockHub>
-      <div className="">
-        <Header>
-          <div className="header-left">
-            <div className="logo-header padding-diff-block">
-              <a
-                className="back-arrow"
-                onClick={() => router.back()}
-                style={{ cursor: "pointer" }}
-              >
-                <img alt="arrow" src="/back-arrrow-header.svg" />
-              </a>
-            </div>
-            <div className="calender-block">
-              <span className="montag-block">Montag, 15.07.2024</span>
-              <span className="hub-block">Schacht für, ABCD</span>
-            </div>
-          </div>
-        </Header>
-      </div>
+    const modifiersClassNames = {
+        closed: "my-closed-day",
+        weekend: "my-weekend-day",
+        open: "my-open-day",
+    };
+    const handleDaySelect = (event, { modifiers }) => {
+        const selected = event || today;
+        const selectedDate = selected.toISOString().split("T")[0];
+        if (selected < today.setHours(0, 0, 0, 0)) {
+            return toast.info(t("SelectedDateIsInThePast"));
+        }
+        const isOpen = sortedDays?.open?.some(
+            (openDate) => openDate.toISOString().split("T")[0] === selectedDate,
+        );
+        if (!isOpen) {
+            return toast.info(t("ThisDayIsClosed"));
+        }
+        const DATE = new Date(selected);
+        const formattedDate = `${DATE.getFullYear()}-${DATE.getMonth() + 1}-${DATE.getDate()}`;
+        dispatch(setDate(formattedDate));
+        router.push(PATH_DASHBOARD.hubManager.shifts);
+    };
 
-      <div className="common-block-hub">
-        <div className="schedule-block">
-          <div className="schedule-block-four">
-            <div className="schedule-block-four-inner">
-              <div className="schedule-block-four-inner-block">
-                <div className="schedule-block-common">
-                  <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="active-block">Aktiv</span>
-                  </div>
-                  <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
-                    <p className="block-tag">-</p>
-                    <p className="end-shift">Schichtende: 8:37 Uhr</p>
-                  </div>
-                </div>
-                <div className="schedule-block-common">
-                  <div className="top-block">
-                    <h2>Schicht manuell beenden</h2>
-                  </div>
-                  <div className="schedule-block-common-checkbox">
-                    <div className="checkbox-block-inner">
-                      <p>No Show</p>
-                      <div className="checkbox-custom">
-                        <div className="form-group">
-                          <input type="checkbox" id="rider"></input>
-                          <label for="rider"></label>
-                        </div>
-                      </div>
+    return (
+        <div className="">
+            <CommonPageBLockHub>
+                <div className="common-block-hub">
+                    <div className="common-block-hub-menu">
+                        <ul>
+                            <li>
+                                <Link
+                                    href={PATH_DASHBOARD.hubManager.dashboard}
+                                >
+                                    {t("Dashboard")}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href={PATH_DASHBOARD.hubManager.schedule}
+                                    className="active-link"
+                                >
+                                    {t("Layers")}
+                                </Link>
+                            </li>
+                            <li>
+                                <div className="select-form-block">
+                                    <HubSelectBox />
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="checkbox-block-inner">
-                      <p>Krankheit </p>
-                      <div className="checkbox-custom">
-                        <div className="form-group">
-                          <input type="checkbox" id="rider"></input>
-                          <label for="rider"></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="checkbox-block-inner">
-                      <p>Unfall</p>
-                      <div className="checkbox-custom">
-                        <div className="form-group">
-                          <input type="checkbox" id="rider"></input>
-                          <label for="rider"></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="checkbox-block-inner">
-                      <p>Korrektur</p>
-                      <div className="checkbox-custom">
-                        <div className="form-group">
-                          <input type="checkbox" id="rider"></input>
-                          <label for="rider"></label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="add-block-inner">
-                    <button className="add-btn">End</button>
-                  </div>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <>
+                            <div className="common-calender-page">
+                                <div className="calender-block">
+                                    <DayPicker
+                                        mode="single"
+                                        selected={today}
+                                        // month={new Date(2024, 9)}
+                                        numberOfMonths={3}
+                                        // pagedNavigation
+                                        modifiers={sortedDays}
+                                        modifiersClassNames={
+                                            modifiersClassNames
+                                        }
+                                        onSelect={handleDaySelect}
+                                        locale={
+                                            localeMapping[i18n.language] || de
+                                        }
+                                    />
+                                </div>
+                            </div>
+                            <div className="label-block-close">
+                                <div className="label-block-close-block">
+                                    <div className="label-block-close-inner">
+                                        <span></span>
+                                        <h3>{t("Closed")}</h3>
+                                    </div>
+                                    <div className="label-block-close-inner weekend-block">
+                                        <span></span>
+                                        <h3>{t("Weekend")}</h3>
+                                    </div>
+                                    <div className="label-block-close-inner open-block">
+                                        <span></span>
+                                        <h3>{t("Open")}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
-              </div>
-            </div>
-            <div className="schedule-block-four-inner">
-              <div className="schedule-block-four-inner-block">
-                <div className="schedule-block-common">
-                  <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="request-block">Angefordert</span>
-                  </div>
-                  <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
-                    <p className="block-tag">-</p>
-                    <p className="end-shift">Schichtende: 8:37 Uhr</p>
-                  </div>
-                </div>
-                <div className="add-btn-block">
-                  <button>
-                    <svg
-                      width="25"
-                      height="24"
-                      viewBox="0 0 25 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M6.2372 6.54297V18.9848C6.2372 19.744 6.85269 20.3595 7.61194 20.3595H17.3894C18.1486 20.3595 18.7641 19.744 18.7641 18.9848V6.54297M3.40918 6.54297H21.591"
-                        stroke="#1C1C1C"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M8.5 6V4.41421C8.5 3.63317 9.13317 3 9.91421 3H15.0858C15.8668 3 16.5 3.63317 16.5 4.41421V6"
-                        stroke="#1C1C1C"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                    <span>Schicht löschen</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="schedule-block-four-inner">
-              <div className="schedule-block-four-inner-block">
-                <div className="schedule-block-common">
-                  <div className="top-block">
-                    <h2>Übersicht</h2>
-                    <span className="complate-block">Erledigt</span>
-                  </div>
-                  <div className="shift-block-inner">
-                    <p>Schichtbeginn: 4:02 Uhr</p>
-                    <p className="block-tag">-</p>
-                    <p>Schichtende: 8:37 Uhr</p>
-                  </div>
-                </div>
-                <div className="schedule-block-common">
-                  <div className="top-block">
-                    <h2>Arbeitszeiten ändern</h2>
-                  </div>
-                  <div className="input-block-inner">
-                    <input type="text" placeholder="End time"></input>
-                    <div className="btn-conform">
-                      <button>Confirm</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            </CommonPageBLockHub>
         </div>
-      </div>
-    </CommonPageBLockHub>
-  );
+    );
 };
 
-export default ScheduleScreen;
+export default Layers;
