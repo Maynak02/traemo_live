@@ -1,4 +1,5 @@
 import Loader from "@/components/Loader";
+import ConfirmationDialog from "@/components/common/ConfirmationDialog";
 import {
     SHIFT_STATUS,
     SHIFT_STATUS_ARRAY,
@@ -8,26 +9,35 @@ import {
 import useMetaData from "@/hooks/useMetaData";
 import useToaster from "@/hooks/useToaster";
 import useToggle from "@/hooks/useToggle";
+import { setDate } from "@/redux/Auth/AuthSlice";
 import { PATH_DASHBOARD } from "@/routes/paths";
 import { API_ROUTER } from "@/services/apiRouter";
 import { axiosDelete, axiosPost } from "@/services/axiosHelper";
 import { encodeData } from "@/utils/jwt";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import { DayPicker } from "react-day-picker";
-import { de } from "react-day-picker/locale";
+import { enUS, de } from "react-day-picker/locale";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 const CalendarShift = () => {
     // ** States
     const [selected, setSelected] = useState(new Date());
     const [isAddingAvailability, setIsAddingAvailability] = useState(false);
+    const [isRemovingAvailability, setIsRemovingAvailability] = useState(false);
 
     // ** Hooks
     const availabilityHandler = useToggle();
+    const confirmationHandler = useToggle();
     const { t, i18n } = useTranslation("common");
+    const localeMapping = {
+        en: enUS,
+        de: de,
+    };
+    const dispatch = useDispatch();
     const { toaster } = useToaster();
     const [shifts, isShiftsLoading] = useMetaData(API_ROUTER.GET_SHIFTS, {
         filters: `ts_start_planned$gt${moment().toISOString()} and ts_start_planned$lt${moment().add(2, "month").endOf("month").toISOString()}`,
@@ -42,6 +52,8 @@ const CalendarShift = () => {
         filters: `date$gt${moment().toISOString()} and date$lt${moment().add(2, "month").endOf("month").toISOString()}`,
         limit: 100,
     });
+
+    const availabilityToDelete = useRef(null);
 
     const currentMonths = useMemo(() => {
         return [
@@ -144,9 +156,12 @@ const CalendarShift = () => {
         async (availabilityId) => {
             try {
                 if (!availabilityId) return;
+                setIsRemovingAvailability(true);
                 const res = await axiosDelete(
                     API_ROUTER.DELETE_AVAILABILITY(availabilityId),
                 );
+                setIsRemovingAvailability(false);
+
                 if (!res.status) {
                     return toaster(
                         res?.message || t("generalErrorText"),
@@ -154,6 +169,7 @@ const CalendarShift = () => {
                     );
                 }
                 if (res.status) {
+                    confirmationHandler.onFalse();
                     toaster(
                         "Availability delete successfully!",
                         TOAST_TYPES.SUCCESS,
@@ -168,7 +184,7 @@ const CalendarShift = () => {
                 toaster(t("generalErrorText"), TOAST_TYPES.ERROR);
             }
         },
-        [fetchRiderAvailabilities, t, toaster],
+        [fetchRiderAvailabilities, t, toaster, confirmationHandler],
     );
 
     const onSelectDate = useCallback(
@@ -194,21 +210,18 @@ const CalendarShift = () => {
                 );
 
                 if (isAvailabilityExistOnThisDate) {
-                    const isConfirmDelete = confirm(
-                        "Are you sure want to delete this availability?",
+                    const availabilityDetails = riderAvailabilities?.find(
+                        ({ date }) =>
+                            moment(date).year() ===
+                                moment(selectedDate).year() &&
+                            moment(date).month() ===
+                                moment(selectedDate).month() &&
+                            moment(date).date() === moment(selectedDate).date(),
                     );
-                    if (isConfirmDelete) {
-                        const availabilityDetails = riderAvailabilities?.find(
-                            ({ date }) =>
-                                moment(date).year() ===
-                                    moment(selectedDate).year() &&
-                                moment(date).month() ===
-                                    moment(selectedDate).month() &&
-                                moment(date).date() ===
-                                    moment(selectedDate).date(),
-                        );
 
-                        await onDeleteAvailability(availabilityDetails?.id);
+                    if (availabilityDetails?.id) {
+                        availabilityToDelete.current = availabilityDetails?.id;
+                        confirmationHandler.onTrue();
                     }
                 }
                 const isCurrentShiftAccepted = shiftsData.accepted.some(
@@ -231,8 +244,12 @@ const CalendarShift = () => {
                     );
 
                     if (acceptedShiftDetails) {
+                        dispatch(
+                            setDate(acceptedShiftDetails?.ts_start_planned),
+                        );
                         push(
-                            `${PATH_DASHBOARD.rider.plannedShifts}?date=${encodeData(acceptedShiftDetails?.ts_start_planned)}`,
+                            PATH_DASHBOARD.rider.plannedShifts,
+                            // `${PATH_DASHBOARD.rider.plannedShifts}?date=${encodeData(acceptedShiftDetails?.ts_start_planned)}`,
                         );
                     }
                 }
@@ -251,6 +268,10 @@ const CalendarShift = () => {
             push,
         ],
     );
+    const onCloseConfirmation = useCallback(() => {
+        confirmationHandler.onFalse();
+        availabilityToDelete.current = null;
+    }, [confirmationHandler]);
 
     // ** Renders
     const renderStatus = useMemo(
@@ -274,6 +295,27 @@ const CalendarShift = () => {
             </div>
         ),
         [t],
+    );
+
+    const renderConfirmation = useMemo(
+        () => (
+            <ConfirmationDialog
+                isOpen={confirmationHandler.value}
+                onClose={onCloseConfirmation}
+                confirmationText={t("confirmDltAvailability")}
+                onConfirm={() =>
+                    onDeleteAvailability(availabilityToDelete.current)
+                }
+                isLoading={isRemovingAvailability}
+            />
+        ),
+        [
+            confirmationHandler,
+            onCloseConfirmation,
+            t,
+            onDeleteAvailability,
+            isRemovingAvailability,
+        ],
     );
 
     if (isShiftsLoading || isRiderAvailabilitiesLoading) return <Loader />;
@@ -309,14 +351,15 @@ const CalendarShift = () => {
                         numberOfMonths={3}
                         modifiers={shiftsData}
                         modifiersClassNames={modifiersClassNames}
-                        locale={i18n.de || de}
                         disabled={{
                             before: new Date(),
                             after: moment().add(2, "month").endOf("month"),
                         }}
+                        locale={localeMapping[i18n.language] || de}
                     />
                 </div>
                 {renderStatus}
+                {renderConfirmation}
             </div>
         </div>
     );

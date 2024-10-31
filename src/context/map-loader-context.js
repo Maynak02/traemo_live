@@ -11,6 +11,7 @@ const MapLoaderProvider = ({ children }) => {
     const { isLoaded, loadError } = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: MAP_API_KEY,
+        libraries: ["places"],
     });
 
     // ** Context State

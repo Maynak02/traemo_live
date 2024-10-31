@@ -4,6 +4,9 @@ const CommonBlock = styled.div`
     position: relative;
     .common-block-ryder {
         padding: 32px 16px;
+        &.ryder-block-pad-diff {
+            padding-top: 6px;
+        }
         .edit-profile-block {
             position: relative;
             .edit-profile-block-three {
@@ -294,10 +297,16 @@ const CommonBlock = styled.div`
                 justify-content: center;
                 width: 100%;
                 border-radius: 30px;
+                background-color: #f2f4f7;
                 span {
                     font-weight: 500;
                     padding-left: 8px;
                     font-size: 14px;
+                }
+            }
+            &.checked {
+                button {
+                    background-color: #ffffff;
                 }
             }
         }
@@ -812,11 +821,17 @@ const CommonBlock = styled.div`
                 justify-content: center;
                 width: 100%;
                 border-radius: 30px;
+                background-color: #f2f4f7;
                 span {
                     font-weight: 500;
                     padding-left: 8px;
                     font-size: 14px;
                     color: #667085;
+                }
+            }
+            &.checked {
+                button {
+                    background-color: #ffffff;
                 }
             }
         }
@@ -826,16 +841,19 @@ const CommonBlock = styled.div`
         padding-bottom: 50px;
         .commising-block {
             position: relative;
+            &.mb-commising-block {
+                margin-bottom: 25px;
+            }
             .commising-product-block {
                 padding-bottom: 24px;
                 padding-top: 24px;
                 border-bottom: 1px dashed #d0d5dd;
-                &:first-child {
+                /* &:first-child {
                     padding-top: 0px;
                 }
                 &:last-child {
                     border: none;
-                }
+                } */
                 .commising-product-block-inner {
                     padding: 16px 12px;
                     border-radius: 8px;
@@ -872,6 +890,7 @@ const CommonBlock = styled.div`
                             color: #000;
                             padding-bottom: 8px;
                             font-weight: 500;
+                            text-align: left;
                         }
                         .top-img-block-text-inner {
                             display: flex;
@@ -894,6 +913,14 @@ const CommonBlock = styled.div`
                                 line-height: 16px;
                                 color: #000;
                                 font-weight: 500;
+                                &.all-accepted {
+                                    border-color: #000;
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+                                &.damaged-qty {
+                                    color: #b32317;
+                                }
                             }
                         }
                     }
@@ -919,9 +946,68 @@ const CommonBlock = styled.div`
                                 background-color: #f6fef9;
                                 border: 1px solid #257947;
                             }
+                            img {
+                                width: 15px;
+                                height: auto;
+                            }
                         }
                     }
                 }
+            }
+            .damage-block-missing {
+                display: flex;
+                margin: 24px -4px 0px;
+                .damage-block-missing-inner {
+                    width: 136px;
+                    padding: 0px 4px;
+                    .damage-block {
+                        width: 100%;
+                        height: 183px;
+                        border: 1px solid #d0d5dd;
+                        background-color: #fefafa;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        border-radius: 5px;
+                        img {
+                            width: 22px;
+                            height: auto;
+                        }
+                        h4 {
+                            font-size: 16px;
+                            color: #b32317;
+                            font-weight: 500;
+                            padding-top: 10px;
+                        }
+                    }
+                    .missing-block {
+                        width: 100%;
+                        height: 183px;
+                        border: 1px solid #d0d5dd;
+                        background-color: #fffcf5;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        border-radius: 8px;
+
+                        img {
+                            width: 28px;
+                            height: auto;
+                        }
+                        h4 {
+                            font-size: 16px;
+                            color: #de8723;
+                            font-weight: 500;
+                            padding-top: 3px;
+                        }
+                    }
+                }
+            }
+            .swiper-slide {
+                margin-right: 0px;
+                background: transparent;
             }
         }
         .commising-bottombar {
@@ -934,6 +1020,7 @@ const CommonBlock = styled.div`
             box-shadow: 10px 0px 40px 0px rgba(0, 0, 0, 0.15);
             padding: 20px;
             border: 1px solid #d0d5dd;
+            z-index: 99;
             button {
                 background-color: #f9c93c;
                 border-radius: 12px;
@@ -1181,6 +1268,83 @@ const CommonBlock = styled.div`
                     font-family: "Public Sans", sans-serif;
                     font-weight: 500;
                     width: 100%;
+                }
+            }
+        }
+    }
+    .map-block-location {
+        height: 100vh;
+        position: relative;
+        .map-block-location-bottom {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background-color: #fff;
+            border-radius: 18px 18px 0px 0px;
+            box-shadow: 10px 0px 40px 0px rgba(0, 0, 0, 0.15);
+            padding: 32px 15px;
+
+            .bottom-bar-target-top {
+                border-radius: 8px;
+                border: 1px solid #d0d5dd;
+                padding: 12px;
+                margin-bottom: 15px;
+                p {
+                    border-radius: 8px;
+                    border: 1px solid #d0d5dd;
+                    padding: 12px;
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: #000;
+                    margin-bottom: 8px;
+                }
+                .bottom-bar-block {
+                    display: flex;
+                    align-items: center;
+                    h4 {
+                        color: #667085;
+                        font-size: 12px;
+                        line-height: 16px;
+                        font-weight: 500;
+                        padding-left: 8px;
+                    }
+                }
+            }
+            .bottom-bar-target {
+                display: flex;
+                gap: 5px;
+                .error-block {
+                    background-color: #fffbfa;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    padding: 10px 12px;
+                    width: 30%;
+                    border: 1px solid #d0d5dd;
+                    span {
+                        padding-left: 8px;
+                        color: #d92d20;
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+                .btn-target {
+                    width: 70%;
+                    button {
+                        background-color: #f9c93c;
+                        border-radius: 12px;
+                        padding: 12px;
+                        justify-content: center;
+                        outline: none;
+                        box-shadow: none;
+                        font-size: 18px;
+                        color: #fff;
+                        font-family: "Public Sans", sans-serif;
+                        font-weight: 500;
+                        width: 100%;
+                    }
                 }
             }
         }

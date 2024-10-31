@@ -1,7 +1,9 @@
 import {
     authState,
+    resetNextCurrentOrderIndex,
     setHubData,
     setProductDetails,
+    setRouteDirection,
     setUserData,
 } from "@/redux/Auth/AuthSlice";
 import { PATH_DASHBOARD } from "@/routes/paths";
@@ -33,6 +35,12 @@ import * as Yup from "yup";
 import moment from "moment";
 import "moment/locale/de";
 import { SHIFT_STATUS, SHIFT_TYPE } from "@/constants/keywords";
+import useMetaData from "./useMetaData";
+import { API_ROUTER } from "@/services/apiRouter";
+import { decodeData } from "@/utils/jwt";
+import axios from "axios";
+import { axiosGet } from "@/services/axiosHelper";
+import { shiftDataState } from "@/redux/ShiftData/ShiftReducer";
 
 export const useHubData = () => {
     const { hubList, hubData } = useSelector(authState);
@@ -111,7 +119,7 @@ export const useProductsListForSupplier = () => {
             });
             setCategoriesWithProducts(categories);
         } catch (error) {
-            console.log("getProductsList ~ error:", error);
+            console.error("getProductsList ~ error:", error);
         } finally {
             setLoading(false);
         }
@@ -918,7 +926,7 @@ export const useShifts = () => {
 
 export const useAvailabilities = () => {
     const router = useRouter();
-    const { t } = useTranslation();
+    const { t } = useTranslation("common");
     const { date = new Date().toISOString().split("T")[0], hubData } =
         useSelector(authState);
     const searchParams = useSearchParams();
@@ -1015,7 +1023,7 @@ export const useShiftData = () => {
     const [shiftData, setShiftData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [reason, setReason] = useState("");
-    const { t } = useTranslation();
+    const { t } = useTranslation("common");
 
     const getShifts = async () => {
         if (!shiftId) return;
@@ -1080,3 +1088,4 @@ export const useShiftData = () => {
         handleCancelShift,
     };
 };
+

@@ -13,11 +13,15 @@ import Link from "next/link";
 import { PATH_DASHBOARD } from "@/routes/paths";
 import { getAddressFromObj } from "@/utils/globalFunctions";
 import { useTranslation } from "react-i18next";
+import "moment/locale/de";
+import { useSelector } from "react-redux";
+import { authState } from "@/redux/Auth/AuthSlice";
 
-const PlannedShiftView = ({ date }) => {
+const PlannedShiftView = () => {
     // ** States **
     const [updatedShifts, setUpdatedShifts] = useState([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
+    const { date: selectedDate } = useSelector(authState);
 
     // ** Hooks **
     const [shifts, isLoading, fetchShifts] = useMetaData(
@@ -25,9 +29,8 @@ const PlannedShiftView = ({ date }) => {
         {},
         true,
     );
-    const { t } = useTranslation();
-
-    const selectedDate = useMemo(() => decodeData(date), [date]);
+    const { t, i18n } = useTranslation("common");
+    moment.locale(i18n.language || "de");
 
     // ** Effects
     useEffect(() => {
@@ -101,7 +104,11 @@ const PlannedShiftView = ({ date }) => {
                             <h2>{t("overview")}</h2>
                             <div className="shift-common-block-time">
                                 <p>{t("startOfShift")}</p>
-                                <span>4:02 Uhr</span>
+                                <span>
+                                    {moment(shift?.ts_start_planned).format(
+                                        "H:mm A",
+                                    )}
+                                </span>
                             </div>
                             <div className="shift-location">
                                 <p>{getAddressFromObj(shift?.address)}</p>

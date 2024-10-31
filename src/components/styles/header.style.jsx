@@ -6,6 +6,12 @@ const Header = styled.div`
     padding: 26px 32px;
     border-bottom: 1px solid rgba(208, 213, 221, 0.6);
     justify-content: space-between;
+    @media (max-width: 1199px) {
+        padding: 30px 15px;
+    }
+    @media (max-width: 991px) {
+        padding: 15px;
+    }
     .header-left {
         display: flex;
         align-items: center;
@@ -16,6 +22,9 @@ const Header = styled.div`
             }
             img {
                 width: 135px;
+                @media (max-width: 991px) {
+                    width: 90px;
+                }
             }
             .back-arrow {
                 img {
@@ -129,14 +138,28 @@ const Header = styled.div`
             box-shadow:
                 0px 1px 3px rgba(16, 24, 40, 0.1),
                 0px 1px 2px rgba(16, 24, 40, 0.06);
+            @media (max-width: 767px) {
+                padding: 10px 12px;
+            }
             p {
                 padding: 0px 12px 0px 0px;
                 font-weight: 600;
                 font-size: 14px;
                 color: #344054;
+                @media (max-width: 767px) {
+                    padding: 0px 5px 0px 0px;
+                    font-size: 13px;
+                    width: 120px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
             }
             .arrow-icon {
                 width: 26px;
+                @media (max-width: 767px) {
+                    width: 20px;
+                }
             }
         }
         .header-right-btn {

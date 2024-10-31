@@ -87,10 +87,11 @@ const LoginPage = () => {
         };
         try {
             const { payload: res } = await dispatch(loginAction(objParam));
-            console.log(res);
             const { data, status, message } = res;
             if (status) {
-                authMagicLink(data.message);
+                const url = new URL(data.message);
+                const token = url.searchParams.get("token");
+                authMagicLink(token);
             } else {
                 setIsLoading(false);
                 toast.error(message);

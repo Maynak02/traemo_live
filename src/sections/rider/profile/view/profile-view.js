@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { authState } from "@/redux/Auth/AuthSlice";
 import { logoutAction } from "@/redux/Auth/action";
-import { useRouter } from "next/navigation";
 import { encodeData } from "@/utils/jwt";
 
 const RiderProfileView = () => {
@@ -18,7 +17,6 @@ const RiderProfileView = () => {
     const { t } = useTranslation("common");
     const { userData } = useSelector(authState);
     const dispatch = useDispatch();
-    const { push } = useRouter();
 
     // ** Constants
     const MENUS = useMemo(
@@ -53,9 +51,8 @@ const RiderProfileView = () => {
 
     // ** Helpers
     const handleLogout = useCallback(async () => {
-        await dispatch(logoutAction());
-        push("/");
-    }, [dispatch, push]);
+        dispatch(logoutAction());
+    }, [dispatch]);
 
     return (
         <CommonBlock>

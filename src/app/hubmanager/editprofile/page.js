@@ -31,7 +31,7 @@ const EditProfile = () => {
                 <FormProvider
                     methods={methods}
                     onSubmit={handleSubmit(onSubmitForm)}
-                    className="mt-[20px] mb-[40px]"
+                    className="mb-[40px]"
                 >
                     <div className="">
                         <Header>

@@ -18,7 +18,7 @@ import { PATH_DASHBOARD } from "@/routes/paths";
 
 const ScheduleScreen = () => {
     const router = useRouter();
-    const { t } = useTranslation();
+    const { t } = useTranslation("common");
     const {
         shiftData,
         isLoading,
@@ -28,7 +28,6 @@ const ScheduleScreen = () => {
         handelNoShow,
         handleCancelShift,
     } = useShiftData();
-    console.log("🚀 ~ ScheduleScreen ~ reason:", reason);
     const { hubData } = useSelector(authState);
     const { formattedDate, DATE: date } = useDateButtonData({
         shiftDate: shiftData?.ts_start_planned,

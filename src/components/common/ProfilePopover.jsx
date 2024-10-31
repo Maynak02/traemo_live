@@ -3,11 +3,12 @@
 import { USER_ROLES, roleRouteMap } from "@/constants/keywords";
 import useElementOutsideClick from "@/hooks/useElementOutsideClick";
 import { authState } from "@/redux/Auth/AuthSlice";
+import { logoutAction } from "@/redux/Auth/action";
 import { PATH_DASHBOARD } from "@/routes/paths";
 import { useRouter } from "next/navigation";
 import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProfilePopover = () => {
     // ** States
@@ -18,6 +19,7 @@ const ProfilePopover = () => {
     const { userData } = useSelector(authState);
     const { push } = useRouter();
     const ref = useRef();
+    const dispatch = useDispatch();
 
     useElementOutsideClick(ref, () => setProfileDropdownOpen(false));
 
@@ -46,9 +48,10 @@ const ProfilePopover = () => {
     // ** Handlers
     const onMenuClick = (item) => {
         if (item.id === "logout") {
+            dispatch(logoutAction());
         }
+        setProfileDropdownOpen(false);
         push(item.path);
-        onClose();
     };
 
     return (

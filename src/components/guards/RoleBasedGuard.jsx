@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const RoleBasedGuard = ({ requiredRole, children }) => {
     const { userData } = useSelector(authState);
-    const { t } = useTranslation();
+    const { t } = useTranslation("common");
     const router = useRouter();
 
     const handleHomeRoute = () => {

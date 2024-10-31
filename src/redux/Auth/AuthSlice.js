@@ -10,6 +10,7 @@ import {
     registerAction,
     resetPasswordAction,
 } from "./action";
+import { ORDER_STATUS } from "@/constants/keywords";
 
 const initialState = {
     isLoading: false,
@@ -24,6 +25,11 @@ const initialState = {
     productDetail: {},
     categorySubCategory: {},
     date: "",
+    currentView: "",
+    orders: [],
+    currentOrderIndex: 0,
+    bag_id: [],
+    indexChangeCount: 0,
 };
 
 const AuthSlice = createSlice({
@@ -65,7 +71,151 @@ const AuthSlice = createSlice({
         setRiderDetail: (state, { payload }) => {
             state.riderDetail = payload;
         },
+        setCurrentView: (state, { payload }) => {
+            state.currentView = payload;
+        },
+        setNextCurrentOrderIndex: (state) => {
+            if (state.orders.length > 0) {
+                state.currentOrderIndex =
+                    (state.currentOrderIndex + 1) % state.orders.length;
+                state.indexChangeCount = state.indexChangeCount + 1;
+            }
+        },
+        resetNextCurrentOrderIndex: (state, { payload }) => {
+            state.currentOrderIndex = 0;
+            state.indexChangeCount = 0;
+            // state.pickedOrders = state.orders;
+            // state.orders = [];
+        },
+        setRouteDirection: (state, { payload }) => {
+            state.orders = payload.updatedDirections;
+            state.currentOrderIndex = 0;
+        },
+
+        updateOrderBagId: (state, { payload }) => {
+            const { bag_id } = payload;
+            const currentOrder = state.orders[state.currentOrderIndex];
+            if (currentOrder) {
+                state.bag_id.push(bag_id);
+                if (Array.isArray(currentOrder.bag_id)) {
+                    currentOrder.bag_id.push(bag_id);
+                } else {
+                    currentOrder.bag_id = [bag_id];
+                }
+            }
+        },
+        setOrderDetailsInOrders: (state, { payload }) => {
+            const { orderDetails } = payload;
+            const currentOrder = state.orders[state.currentOrderIndex];
+            let isChecked = false;
+            let isPicked = false;
+            // let isDelivered = false;
+            let isSolveLater = false;
+            let bag_id = [];
+            let isFetched = true;
+            if (
+                orderDetails?.status === ORDER_STATUS.PICKED ||
+                orderDetails?.ts_picked !== null
+            ) {
+                isChecked = true;
+                isPicked = true;
+            } else if (
+                orderDetails?.status === ORDER_STATUS.DELIVERED ||
+                orderDetails?.ts_delivered !== null ||
+                orderDetails?.status === ORDER_STATUS.REFUNDED
+            ) {
+                isChecked = true;
+                isPicked = true;
+                // isDelivered = true;
+            } else if (orderDetails?.status === ORDER_STATUS.ORDERED) {
+            }
+            state.orders[state.currentOrderIndex] = {
+                ...currentOrder,
+                orderDetails,
+                isFetched,
+                isChecked,
+                isPicked,
+                // isDelivered,
+                isSolveLater,
+                bag_id,
+            };
+        },
+        updateOrderStatus: (state, { payload }) => {
+            const { statusKey, value } = payload;
+            state.orders[state.currentOrderIndex][statusKey] = value;
+            if (statusKey == "isPicked") {
+                state.orders[state.currentOrderIndex].orderDetails.status =
+                    ORDER_STATUS.PICKED;
+                if (state.currentOrderIndex < state.orders.length - 1) {
+                    state.currentOrderIndex = state.currentOrderIndex + 1;
+                    state.indexChangeCount = state.indexChangeCount + 1;
+                }
+            }
+        },
+
+        updateOrderProductField: (state, { payload }) => {
+            const { product_id, fieldKey, value, isDefault = true } = payload;
+            const productIndex = state.orders[
+                state.currentOrderIndex
+            ].orderDetails.items.findIndex(
+                (item) => item.product_id === product_id,
+            );
+
+            if (productIndex !== -1) {
+                const item =
+                    state.orders[state.currentOrderIndex].orderDetails.items[
+                        productIndex
+                    ];
+
+                let updatedValue = value;
+
+                if (fieldKey === "quantity_refunded") {
+                    updatedValue += item.quantity_refunded;
+                }
+                item[fieldKey] = updatedValue;
+                if (
+                    fieldKey === "acceptedCount" &&
+                    updatedValue === item.quantity - item.quantity_refunded &&
+                    isDefault
+                ) {
+                    item.isDamaged = false;
+                    item.isMissing = false;
+                    state.orders[state.currentOrderIndex].isSolveLater = false;
+                }
+            }
+        },
+        shiftCurrentProductToLast: (state, { payload }) => {
+            const { product_id } = payload;
+
+            if (state.orders.length === 0) return;
+            const tempItems = [
+                ...state.orders[state.currentOrderIndex].orderDetails.items,
+            ];
+            const productIndex = tempItems.findIndex(
+                (item) => item.product_id === product_id,
+            );
+            if (productIndex !== -1) {
+                const [productToMove] = tempItems.splice(productIndex, 1);
+                tempItems.push(productToMove);
+                state.orders[state.currentOrderIndex].orderDetails.items =
+                    tempItems;
+            }
+        },
+
+        shiftCurrentOrderToLast: (state) => {
+            if (state.orders.length === 0) return;
+            const currentOrder = state.orders[state.currentOrderIndex];
+            currentOrder.isSolveLater = true;
+            const updatedOrders = [
+                ...state.orders.slice(0, state.currentOrderIndex),
+                ...state.orders.slice(state.currentOrderIndex + 1),
+                currentOrder,
+            ];
+            state.orders = updatedOrders;
+            state.indexChangeCount = state.indexChangeCount + 1;
+        },
     },
+
     extraReducers: (builder) => {
         builder
             // .addCase(registerAction.pending, (state, { payload }) => {
@@ -184,4 +334,14 @@ export const {
     setCategorySubCategoryDetails,
     setRiderDetail,
     setDate,
+    setCurrentView,
+    setNextCurrentOrderIndex,
+    resetNextCurrentOrderIndex,
+    updateOrderBagId,
+    setRouteDirection,
+    setOrderDetailsInOrders,
+    updateOrderStatus,
+    updateOrderProductField,
+    shiftCurrentProductToLast,
+    shiftCurrentOrderToLast,
 } = AuthSlice.actions;

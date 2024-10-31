@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef } from "react";
+import React, { memo, useMemo } from "react";
 import { GoogleMap, Polygon } from "@react-google-maps/api";
 
 import useMapLoader from "@/hooks/useMapLoader";
@@ -120,7 +120,14 @@ const SelectLocationMap = ({
             mapContainerStyle={containerStyle}
             zoom={10}
             center={derivedCenter}
-            options={{ styles }}
+            options={{
+                styles,
+                zoomControl: false,
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                colorScheme: "DARK",
+            }}
         >
             {/* Regions */}
             {renderAvailableRegions}

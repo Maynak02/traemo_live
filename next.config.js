@@ -41,7 +41,7 @@ module.exports = {
     // images: {
     //   domains: ["fetishfinder-media.dryrun.click"],
     // },
-    reactStrictMode: true,
+    reactStrictMode: false,
     // images: {
     //   remotePatterns: [
     //     {

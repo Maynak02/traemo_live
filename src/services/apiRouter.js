@@ -23,6 +23,7 @@ export const API_ROUTER = {
     // PAYMENTS
     CREATE_PAYMENT: "/payments",
     LIST_PAYMENT_METHODS: "/payments/methods",
+    REFUNDS: "/refunds",
 
     GET_FUNDS: "/funds",
     CHARGE_USER: "/funds",
@@ -63,6 +64,13 @@ export const API_ROUTER = {
     CREATE_AVAILABILITIES: "/availabilities",
     DELETE_AVAILABILITY: (availabilityId) =>
         `/availabilities/${availabilityId}`,
+    GET_ROUTES: "/routes",
+    GET_ROUTES_BY_ID: (routeId) => `/routes/${routeId}`,
+
+    // ORDERS
+    GET_ORDERS: "/orders",
+    GET_ORDER_DETAILS: (orderId) => `/orders/${orderId}`,
+    UPDATE_ORDER_DETAILS: (orderId) => `/orders/${orderId}`,
 
     // DATA
     GET_KNOWI_URL: "/knowi",
@@ -74,7 +82,10 @@ export const API_ROUTER = {
 
     GET_RIDER: (riderId) => `/riders/${riderId}`,
     UPDATE_RIDER: `/riders`,
-
+    GET_TODO_TASK: (task) => `/todos/${task}`,
     // ** Upload Files
     UPLOAD_FILE: "/uploads",
+
+    // ** Tasks
+    GET_TODOS: (type) => `/todos/${type}`,
 };

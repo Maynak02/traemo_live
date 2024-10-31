@@ -23,3 +23,24 @@ export const getAddressFromObj = (address) => {
 
     return parts.join(", ");
 };
+
+export const truncateString = (
+    text,
+    startLength = 5,
+    endLength = 4,
+    ellipsis = "...",
+) => {
+    if (!text) return "";
+    if (text.length <= startLength + endLength) {
+        return text;
+    }
+    const start = text.slice(0, startLength);
+    const end = text.slice(-endLength);
+    return `${start}${ellipsis}${end}`;
+};
+
+export const calculateDistance = (point1, point2) => {
+    const dx = point1.lat - point2.lat;
+    const dy = point1.lng - point2.lng;
+    return Math.sqrt(dx * dx + dy * dy);
+};

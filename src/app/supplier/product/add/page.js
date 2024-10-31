@@ -57,7 +57,7 @@ const AddProductPage = () => {
                                                     )}
                                                 />
                                                 {errors.title && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {errors.title.message}
                                                     </p>
                                                 )}
@@ -75,7 +75,7 @@ const AddProductPage = () => {
                                                         placeholder="00.00"
                                                     />
                                                     {errors.price_supplier && (
-                                                        <p>
+                                                        <p className="text-red-500">
                                                             {
                                                                 errors
                                                                     .price_supplier
@@ -109,7 +109,7 @@ const AddProductPage = () => {
                                                         placeholder="1"
                                                     />
                                                     {errors.quantity && (
-                                                        <p>
+                                                        <p className="text-red-500">
                                                             {
                                                                 errors.quantity
                                                                     .message
@@ -152,7 +152,7 @@ const AddProductPage = () => {
                                                         )}
                                                     />
                                                     {errors.unit && (
-                                                        <p>
+                                                        <p className="text-red-500">
                                                             {
                                                                 errors.unit
                                                                     .message
@@ -181,7 +181,7 @@ const AddProductPage = () => {
                                                     )}
                                                 />
                                                 {errors.description && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {
                                                             errors.description
                                                                 .message
@@ -224,7 +224,7 @@ const AddProductPage = () => {
                                                                         .ingredients?.[
                                                                         index
                                                                     ]?.name && (
-                                                                        <p>
+                                                                        <p className="text-red-500">
                                                                             {
                                                                                 errors
                                                                                     .ingredients[
@@ -249,7 +249,7 @@ const AddProductPage = () => {
                                                                         index
                                                                     ]
                                                                         ?.value && (
-                                                                        <p>
+                                                                        <p className="text-red-500">
                                                                             {
                                                                                 errors
                                                                                     .ingredients[
@@ -340,7 +340,7 @@ const AddProductPage = () => {
                                                                         .allergens?.[
                                                                         index
                                                                     ] && (
-                                                                        <p>
+                                                                        <p className="text-red-500">
                                                                             {
                                                                                 errors
                                                                                     .allergens[
@@ -474,7 +474,7 @@ const AddProductPage = () => {
                                                                             nutrient
                                                                                 .name
                                                                         ] && (
-                                                                            <p>
+                                                                            <p className="text-red-500">
                                                                                 {
                                                                                     errors
                                                                                         .nutrition[
@@ -532,7 +532,7 @@ const AddProductPage = () => {
                                                 )}
                                             />
                                             {errors.storage_type && (
-                                                <p>
+                                                <p className="text-red-500">
                                                     {
                                                         errors.storage_type
                                                             .message
@@ -550,7 +550,7 @@ const AddProductPage = () => {
                                                 placeholder={t("Unlimited")}
                                             />
                                             {errors.max_daily_quantity && (
-                                                <p>
+                                                <p className="text-red-500">
                                                     {
                                                         errors
                                                             .max_daily_quantity
@@ -597,7 +597,7 @@ const AddProductPage = () => {
                                                     )}
                                                 />
                                                 {errors.category_id && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {
                                                             errors.category_id
                                                                 .message
@@ -643,7 +643,7 @@ const AddProductPage = () => {
                                                     )}
                                                 />
                                                 {errors.subcategory_id && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {
                                                             errors
                                                                 .subcategory_id
@@ -674,7 +674,7 @@ const AddProductPage = () => {
                                                     placeholder="0"
                                                 />
                                                 {errors.width && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {errors.width.message}
                                                     </p>
                                                 )}
@@ -689,7 +689,7 @@ const AddProductPage = () => {
                                                     placeholder="0"
                                                 />
                                                 {errors.height && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {errors.height.message}
                                                     </p>
                                                 )}
@@ -702,7 +702,7 @@ const AddProductPage = () => {
                                                     placeholder="0"
                                                 />
                                                 {errors.depth && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {errors.depth.message}
                                                     </p>
                                                 )}
@@ -715,7 +715,7 @@ const AddProductPage = () => {
                                                     placeholder="0"
                                                 />
                                                 {errors.weight && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {errors.weight.message}
                                                     </p>
                                                 )}
@@ -746,7 +746,7 @@ const AddProductPage = () => {
                                                     // }
                                                 />
                                                 {errors.ts_available_start && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {
                                                             errors
                                                                 .ts_available_start
@@ -769,7 +769,7 @@ const AddProductPage = () => {
                                                     )}
                                                 />
                                                 {errors.ts_available_end && (
-                                                    <p>
+                                                    <p className="text-red-500">
                                                         {
                                                             errors
                                                                 .ts_available_end

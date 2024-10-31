@@ -14,6 +14,7 @@ import Loader from "@/components/Loader";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setDate } from "@/redux/Auth/AuthSlice";
+import moment from "moment";
 const Layers = () => {
     const router = useRouter();
     const { sortedDays, isLoading } = useDaysForHubManager();
@@ -93,6 +94,12 @@ const Layers = () => {
                                             modifiersClassNames
                                         }
                                         onSelect={handleDaySelect}
+                                        disabled={{
+                                            before: new Date(),
+                                            after: moment()
+                                                .add(2, "month")
+                                                .endOf("month"),
+                                        }}
                                         locale={
                                             localeMapping[i18n.language] || de
                                         }

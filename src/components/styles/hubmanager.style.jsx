@@ -3,14 +3,35 @@ import styled from "styled-components";
 const CommonPageBLockHub = styled.div`
     .common-block-hub {
         position: relative;
+        @media (max-width: 767px) {
+            padding: 15px;
+        }
         .common-block-hub-menu {
             padding: 16px 32px;
             border-bottom: 1px solid rgba(208, 213, 221, 0.6);
+            @media (max-width: 1199px) {
+                padding: 15px;
+            }
+            @media (max-width: 767px) {
+                padding: 12px;
+                border: 1px solid rgba(208, 213, 221, 0.6);
+                border-radius: 8px;
+            }
             ul {
                 display: flex;
                 align-items: center;
+                @media (max-width: 767px) {
+                    flex-wrap: wrap;
+                }
                 li {
                     margin-right: 12px;
+                    @media (max-width: 767px) {
+                        margin-right: 0px;
+                        width: 50%;
+                        &:last-child {
+                            width: 100%;
+                        }
+                    }
                     a {
                         color: #98a2b3;
                         font-size: 14px;
@@ -21,6 +42,11 @@ const CommonPageBLockHub = styled.div`
                         align-items: center;
                         justify-content: center;
                         width: 160px;
+                        @media (max-width: 767px) {
+                            width: 100%;
+                            padding: 11px 6px;
+                            font-size: 13px;
+                        }
                         &.active-link {
                             box-shadow:
                                 0px 1px 3px rgba(16, 24, 40, 0.1),
@@ -33,6 +59,11 @@ const CommonPageBLockHub = styled.div`
                         .select-block-fetishes {
                             height: 48px;
                             margin-bottom: 0px;
+                            @media (max-width: 767px) {
+                                height: 43px;
+                                width: 100%;
+                                margin-top: 12px;
+                            }
                             .react-select__control {
                                 height: 48px;
                                 box-shadow:
@@ -41,10 +72,18 @@ const CommonPageBLockHub = styled.div`
                                 border: 1px solid rgba(208, 213, 221, 0.6);
                                 border-radius: 8px;
                                 width: 150px;
+                                @media (max-width: 767px) {
+                                    width: 100%;
+                                    height: 43px;
+                                    font-size: 13px;
+                                }
                                 .react-select__placeholder {
                                     color: #98a2b3;
                                     line-height: 14px;
                                     font-size: 14px;
+                                    @media (max-width: 767px) {
+                                        font-size: 13px;
+                                    }
                                 }
                                 .react-select__input-container {
                                     color: #98a2b3;
@@ -101,6 +140,15 @@ const CommonPageBLockHub = styled.div`
         }
         .dashboard-block-main {
             padding: 52px 32px 52px 235px;
+            @media (max-width: 1400px) {
+                padding: 40px 30px 40px 100px;
+            }
+            @media (max-width: 1199px) {
+                padding: 30px 15px;
+            }
+            @media (max-width: 767px) {
+                padding: 15px 0px;
+            }
             .dashboard-block-main-inner {
                 display: flex;
                 margin: 0px -15px;
@@ -112,6 +160,11 @@ const CommonPageBLockHub = styled.div`
                         border-radius: 24px;
                         padding: 32px;
                         min-height: 350px;
+                        @media (max-width: 767px) {
+                            padding: 15px;
+                            border-radius: 8px;
+                            min-height: 250px;
+                        }
                     }
                 }
             }
@@ -167,6 +220,14 @@ const CommonPageBLockHub = styled.div`
                                         border-radius: 12px;
                                         border: 1px solid #d0d5dd;
                                         padding: 12px;
+                                        position: relative;
+                                        .text-red-500 {
+                                            font-size: 10px;
+                                            line-height: 10px;
+                                            position: absolute;
+                                            bottom: -11px;
+                                            left: 0px;
+                                        }
                                         label {
                                             font-size: 13px;
                                             line-height: 15px;
@@ -255,6 +316,14 @@ const CommonPageBLockHub = styled.div`
                             .form-block-inner-block-flex {
                                 padding: 0px 4px 12px;
                                 width: 50%;
+                                position: relative;
+                                .text-red-500 {
+                                    font-size: 10px;
+                                    line-height: 10px;
+                                    position: absolute;
+                                    bottom: 2px;
+                                    left: 5px;
+                                }
                                 input {
                                     border: none;
                                     outline: none;
@@ -699,6 +768,12 @@ const CommonPageBLockHub = styled.div`
         .common-calender-page {
             position: relative;
             padding: 32px;
+            @media (max-width: 1199px) {
+                padding: 15px;
+            }
+            @media (max-width: 767px) {
+                padding: 15px 0px 70px;
+            }
             .rdp-root {
                 .rdp-months {
                     display: flex;
@@ -708,11 +783,24 @@ const CommonPageBLockHub = styled.div`
                     .rdp-nav {
                         display: none;
                     }
+                    @media (max-width: 991px) {
+                        flex-wrap: wrap;
+                        gap: 15px;
+                    }
+                    @media (max-width: 767px) {
+                        gap: 10px;
+                    }
                     .rdp-month {
                         padding: 32px;
                         border: 1px solid #d0d5dd;
                         border-radius: 12px;
                         width: 33.33%;
+                        @media (max-width: 1199px) {
+                            padding: 15px;
+                        }
+                        @media (max-width: 991px) {
+                            width: 100%;
+                        }
                         .rdp-month_caption {
                             display: flex;
                             align-items: center;
@@ -723,6 +811,10 @@ const CommonPageBLockHub = styled.div`
                                 margin-bottom: 12px;
                                 font-weight: 500;
                                 color: #000;
+                                @media (max-width: 1199px) {
+                                    font-size: 20px;
+                                    line-height: 28px;
+                                }
                             }
                         }
                         .rdp-month_grid {
@@ -734,6 +826,10 @@ const CommonPageBLockHub = styled.div`
                                         line-height: 24px;
                                         color: #000;
                                         font-weight: 400;
+                                        @media (max-width: 1199px) {
+                                            font-size: 14px;
+                                            line-height: 20px;
+                                        }
                                     }
                                 }
                             }
@@ -743,6 +839,20 @@ const CommonPageBLockHub = styled.div`
                                         border-radius: 24px;
                                         color: #000;
                                         position: relative;
+                                        button {
+                                            width: 42px;
+                                            height: 42px;
+                                            border-radius: 24px;
+                                        }
+                                        @media (max-width: 1199px) {
+                                            font-size: 13px;
+                                            width: 30px;
+                                            height: 30px;
+                                            button {
+                                                width: 30px;
+                                                height: 30px;
+                                            }
+                                        }
                                         &.my-closed-day {
                                             button {
                                                 &::before {
@@ -793,15 +903,15 @@ const CommonPageBLockHub = styled.div`
                                         }
                                         &.rdp-selected,
                                         &:hover {
-                                            color: #f9c93c;
-                                            background-color: rgba(
-                                                249,
-                                                201,
-                                                60,
-                                                0.15
-                                            );
                                             button {
                                                 color: #f9c93c;
+                                                color: #f9c93c;
+                                                background-color: rgba(
+                                                    249,
+                                                    201,
+                                                    60,
+                                                    0.15
+                                                );
                                             }
                                         }
 
@@ -823,10 +933,35 @@ const CommonPageBLockHub = styled.div`
         .label-block-close {
             padding: 0px 32px 32px;
             position: relative;
+            @media (max-width: 1199px) {
+                padding: 0px 15px 15px;
+            }
+            @media (max-width: 767px) {
+                position: fixed;
+                z-index: 9;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                background-color: #fff;
+                padding: 0px;
+                border-radius: 12px 12px 0px 0px;
+                box-shadow: 10px 0px 40px 0px rgba(0, 0, 0, 0.15);
+            }
             .label-block-close-block {
                 padding: 32px;
                 border: 1px solid #d0d5dd;
                 border-radius: 12px;
+                @media (max-width: 1199px) {
+                    padding: 15px;
+                }
+                @media (max-width: 767px) {
+                    border: none;
+                    border-radius: 0px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    padding: 12px 6px;
+                }
                 .label-block-close-inner {
                     margin-bottom: 12px;
                     border-radius: 8px;
@@ -834,12 +969,21 @@ const CommonPageBLockHub = styled.div`
                     display: flex;
                     align-items: center;
                     padding: 10px;
+                    @media (max-width: 767px) {
+                        width: 31%;
+
+                        margin: 0px 2px;
+                    }
                     span {
                         display: block;
                         background-color: #f04438;
                         width: 8px;
                         height: 8px;
                         border-radius: 50%;
+                        @media (max-width: 1199px) {
+                            width: 5px;
+                            height: 5px;
+                        }
                     }
                     h3 {
                         font-size: 16px;
@@ -847,6 +991,15 @@ const CommonPageBLockHub = styled.div`
                         color: #f04438;
                         padding-left: 10px;
                         font-weight: 400;
+                        @media (max-width: 1199px) {
+                            font-size: 14px;
+                            line-height: 18px;
+                        }
+                        @media (max-width: 767px) {
+                            font-size: 12px;
+                            line-height: 14px;
+                            padding-left: 5px
+                        }
                     }
                     &.weekend-block {
                         background-color: #f9f5ff;

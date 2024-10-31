@@ -1,15 +1,17 @@
 "use client";
 
+import moment from "moment";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher = () => {
     const router = useRouter();
     const pathname = usePathname();
-    const { i18n } = useTranslation();
+    const { i18n } = useTranslation("common");
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
+        moment.locale(lang);
         router.push(pathname, pathname, { locale: lang });
     };
 

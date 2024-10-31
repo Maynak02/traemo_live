@@ -16,6 +16,7 @@ import ProtectedPageService from "@/services/protectedPage";
 import { PersistGate } from "redux-persist/integration/react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n";
+import "moment/locale/de";
 
 const inter = Inter({
     variable: "--font-inter",

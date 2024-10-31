@@ -6,10 +6,8 @@ export const metadata = {
 };
 
 const PlannedShitsPage = ({ searchParams }) => {
-    // ** Constants
-    const { date } = searchParams;
 
-    return <PlannedShiftView date={date} />;
+    return <PlannedShiftView  />;
 };
 
 export default PlannedShitsPage;

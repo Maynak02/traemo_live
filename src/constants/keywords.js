@@ -58,6 +58,7 @@ export const SHIFT_STATUS = {
     ACTIVE_BACKUP: "ACTIVE_BACKUP",
     ACTIVE_IDLE: "ACTIVE_IDLE",
     ACTIVE_PICKING: "ACTIVE_PICKING",
+    ACTIVE_PICKED: "ACTIVE_PICKED",
     ACTIVE_DELIVERING: "ACTIVE_DELIVERING",
     DECLINED: "DECLINED",
     CANCELLED: "CANCELLED",
@@ -100,3 +101,28 @@ export const SHIFT_STATUS_ARRAY = [
 ];
 
 export const SHIFT_END_REASONS = ["NOSHOW", "SICK", "ACCIDENT", "CORRECTION"];
+
+export const TODO_TYPES = {
+    PRE_DELIVERING: "pre_delivering",
+};
+
+export const ORDER_STATUS = {
+    ORDERED: "ordered",
+    PICKED: "picked",
+    REFUNDED: "refunded",
+    DELIVERED: "delivered",
+};
+
+export const REFUND_REASONS = {
+    isDamaged: "damaged",
+    isMissing: "missing",
+    isLost: "lost",
+    other: "other",
+};
+
+export const SHIFT_HOURS = 4.25;
+
+export const TO_DO_STATUS = {
+    PRE_DELIVERING: "pre_delivering",
+    PRE_PICKING: "pre_picking",
+};
